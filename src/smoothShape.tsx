@@ -1,4 +1,6 @@
-import { Point } from './point';
+
+import { zip } from './arrayUtils';
+import { lerpPoints, Point, roundPoint } from './point';
 
 /**
  * Applies Chaikin smoothing to the given points a number of times, 
@@ -9,7 +11,21 @@ import { Point } from './point';
  * @returns new array of Point objects
  */
 export function smoothShape(pts: Point[], numTimes: number) {
-  //TODO: you need to implement this function!
-
+  for (let i = 0; i < numTimes; i++) {
+    pts = smoothShapeOnce(pts);
+  }
   return pts;
+}
+
+export function smoothShapeOnce(pts: Point[]) {
+  const newPts = [];
+  const laggedPts = [...pts.slice(1), pts[0]];
+  const pairs: [Point, Point][] = zip(pts, laggedPts);
+
+  for (let pair of pairs) {
+    const a = lerpPoints(pair[0], pair[1], 0.25);
+    const b = lerpPoints(pair[0], pair[1], 0.75);
+    newPts.push(roundPoint(a), roundPoint(b));
+  }
+  return newPts;
 }
