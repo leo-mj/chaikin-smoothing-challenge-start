@@ -40,7 +40,7 @@ export function SmoothedShape({
       <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         {/* original path */}
         {shouldShowOriginal && (
-          <path d={makePathCmd(pts)} stroke={palette[3]} fill="transparent" />
+          <path d={makePathCmd(pts)} stroke={palette[3]} fill="pink" />
         )}
 
         {/* original points */}
@@ -59,7 +59,7 @@ export function SmoothedShape({
           < path
             d={makePathCmd(ptsSmoothed)}
             stroke={palette[1]}
-            fill="transparent"
+            fill="blue"
           />
         }
         {/* smoothed points */}
